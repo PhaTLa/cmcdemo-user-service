@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.user_management.user.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.user_management.user.model.User">
+    <!--@mbg.generated -->
+    <!--@Table user -->
+    <!-- generated on Tue Sep 06 09:51:46 GMT+07:00 2022 -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="delete_yn" jdbcType="TINYINT" property="deleteYn" />
+    <result column="created_dtm" jdbcType="TIMESTAMP" property="createdDtm" />
+    <result column="created_id" jdbcType="BIGINT" property="createdId" />
+    <result column="updated_dtm" jdbcType="TIMESTAMP" property="updatedDtm" />
+    <result column="updated_id" jdbcType="BIGINT" property="updatedId" />
+    <result column="role_id" jdbcType="TINYINT" property="roleId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated -->
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.user_management.user.model.User" useGeneratedKeys="true">
+    <!--@mbg.generated -->
+    insert into user (`name`, `password`, email, 
+      delete_yn, created_dtm, created_id, 
+      updated_dtm, updated_id, role_id
+      )
+    values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{deleteYn,jdbcType=TINYINT}, #{createdDtm,jdbcType=TIMESTAMP}, #{createdId,jdbcType=BIGINT}, 
+      #{updatedDtm,jdbcType=TIMESTAMP}, #{updatedId,jdbcType=BIGINT}, #{roleId,jdbcType=TINYINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.user_management.user.model.User">
+    <!--@mbg.generated -->
+    update user
+    set `name` = #{name,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      delete_yn = #{deleteYn,jdbcType=TINYINT},
+      created_dtm = #{createdDtm,jdbcType=TIMESTAMP},
+      created_id = #{createdId,jdbcType=BIGINT},
+      updated_dtm = #{updatedDtm,jdbcType=TIMESTAMP},
+      updated_id = #{updatedId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated -->
+    select id, `name`, `password`, email, delete_yn, created_dtm, created_id, updated_dtm, 
+    updated_id, role_id
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    <!--@mbg.generated -->
+    select id, `name`, `password`, email, delete_yn, created_dtm, created_id, updated_dtm, 
+    updated_id, role_id
+    from user
+  </select>
+  <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated -->
+    select id, `name`, `password`, email, delete_yn, created_dtm, created_id, updated_dtm,
+    updated_id, role_id
+    from user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getUserIdByUserName" parameterType="java.lang.String" resultType="long">
+    select id
+    from user
+    where email = #{userName}
+  </select>
+</mapper>
