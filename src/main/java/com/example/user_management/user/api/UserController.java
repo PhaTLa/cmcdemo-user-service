@@ -78,10 +78,10 @@ public class UserController {
     }
 
 
-//    @GetMapping("/users")
-//    public ResponseEntity<List<User>> getUsers(){
-//        return ResponseEntity.ok().body(userService.getUsers());
-//    }
+    @GetMapping("/get-user/{userId}")
+    public ResponseEntity<?> getUsers(@PathVariable(name = "userId") Long id){
+        return ResponseEntity.ok().body(userService.selectByPrimaryKey(id));
+    }
 //
 //    @PostMapping("/user/save")
 //    public ResponseEntity<User> saveUser(@RequestBody User user){
