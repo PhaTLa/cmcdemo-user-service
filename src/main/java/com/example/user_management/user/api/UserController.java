@@ -7,6 +7,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.user_management.user.dao.UserMapper;
 import com.example.user_management.user.dto.req.ReqLogin;
 import com.example.user_management.user.dto.req.ReqUserDto;
+import com.example.user_management.user.dto.resp.UserIdAndNameRespDto;
 import com.example.user_management.user.entity.User;
 import com.example.user_management.user.service.AppUserService;
 import com.example.user_management.user.service.UserService;
@@ -82,12 +83,15 @@ public class UserController {
     public ResponseEntity<?> getUsers(@PathVariable(name = "userId") Long id){
         return ResponseEntity.ok().body(userService.selectByPrimaryKey(id));
     }
-//
-//    @PostMapping("/user/save")
-//    public ResponseEntity<User> saveUser(@RequestBody User user){
-//        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-//        return ResponseEntity.created(uri).body(userService.saveUser(user));
-//    }
+    @GetMapping("/get-id/{username}")
+    public ResponseEntity<?> getIdByUserName(@PathVariable("username") String username){
+        Long idUser = userMapper.getUserIdByUserName(username);
+        if(idUser == null){
+            return ResponseEntity.notFound().build();
+        }
+        UserIdAndNameRespDto respDto = new UserIdAndNameRespDto(idUser,username);
+        return ResponseEntity.ok().body(respDto);
+    }
 //
 //    @PostMapping("/role/save")
 //    public ResponseEntity<Role> saveRole(@RequestBody Role role){
