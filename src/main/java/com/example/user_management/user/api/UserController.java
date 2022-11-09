@@ -38,7 +38,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @Slf4j
 public class UserController {
     private final AppUserService appUserService;
